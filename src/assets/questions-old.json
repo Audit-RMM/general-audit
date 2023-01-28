@@ -1,0 +1,44 @@
+[
+    {
+      "body": "question 1",
+      "coef": "2",
+      "responses": [
+        {
+          "body": "response 1",
+          "pourcentage": "20",
+          "subQuestions": [
+            {
+              "body": "sub question 1 if response 1 is selected",
+              "responses": [
+                {
+                  "body": "reponse 1 of subQuestion 1",
+                  "pourcentage": "40"
+                },
+                {
+                  "body": "reponse 2 of subQuestion 1",
+                  "pourcentage": "0"
+                }
+              ]
+            },
+            {
+              "body": "sub question 2 if response 1 is selected",
+              "responses": [
+                {
+                  "body": "reponse 2 of subQuestion 1",
+                  "pourcentage": "40"
+                },
+                {
+                  "body": "reponse 2 of subQuestion 1",
+                  "pourcentage": "0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "body": "response 2",
+          "pourcentage": "0"
+        }
+      ]
+    }
+  ];

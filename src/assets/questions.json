@@ -1,0 +1,143 @@
+[
+    {
+      "body": "Votre application utilise-t-elle un système de versionning [ exp : Git, SVN ect… ]",
+      "description": "",
+      "category": "",
+      "coef": "4",
+      "responses": [
+        {
+          "body": "Oui",
+          "pourcentage": "50",
+          "recomandation": "",
+          "questionIsCountableIfchecked": "true"
+        },
+        {
+          "body": "Non",
+          "pourcentage": "-30",
+          "questionIsCountableIfchecked": "true"
+        }
+      ],
+      "subQuestions": [
+        {
+          "responseIndex" : "0",
+          "body": "Quel système utilise-t-elle ?",
+          "responses": [
+            {
+              "body": "GIT",
+              "pourcentage": "50",
+              "recomandation": ""
+            },
+            {
+              "body": "SVN",
+              "pourcentage": "20",
+              "recomandation": ""
+            },
+            {
+              "body": "Autre",
+              "pourcentage": "10",
+              "recomandation": ""
+            }
+          ],
+          "subQuestions": []
+        }
+      ]
+    },
+    {
+      "body": "La partie technique de votre application est-elle documentée ?",
+      "description": "",
+      "category": "",
+      "coef": "2",
+      "responses": [
+        {
+          "body": "Oui",
+          "pourcentage": "40",
+          "recomandation": "",
+          "questionIsCountableIfchecked": "true"
+        },
+        {
+          "body": "Non",
+          "pourcentage": "-10",
+          "questionIsCountableIfchecked": "true"
+        }
+      ],
+      "subQuestions": [
+        {
+          "responseIndex" : "0",
+          "body": "Les prérequis de mise en place de l'application sont-ils mentionnés ?",
+          "responses": [
+            {
+              "body": "OUI",
+              "pourcentage": "20",
+              "recomandation": ""
+            },
+            {
+              "body": "NON",
+              "pourcentage": "0",
+              "recomandation": ""
+            }
+          ],
+          "subQuestions": []
+
+        },
+        {
+          "responseIndex" : "0",
+          "body": "Les étapes de mise en place de l'application (installation & configuration .. )  sont-ils mentionnés ?",
+          "responses": [
+            {
+              "body": "OUI",
+              "pourcentage": "20",
+              "recomandation": ""
+            },
+            {
+              "body": "NON",
+              "pourcentage": "0",
+              "recomandation": ""
+            }
+          ],
+          "subQuestions": []
+        },
+        {
+          "responseIndex" : "0",
+          "body": "Un guide d'utilisation de l'application est-il présent ?",
+          "responses": [
+            {
+              "body": "OUI",
+              "pourcentage": "20",
+              "recomandation": ""
+            },
+            {
+              "body": "NON",
+              "pourcentage": "0",
+              "recomandation": ""
+            }
+          ],
+          "subQuestions": []
+        }
+      ]
+    },
+    {
+      "body": "Si votre application s'interface-t-elle avec d'autres services Les flux sont-ils documentés?  ",
+      "description": "",
+      "category": "",
+      "coef": "2",
+      "responses": [
+        {
+          "body": "Oui",
+          "pourcentage": "100",
+          "recomandation": "",
+          "questionIsCountableIfchecked": "true"
+        },
+        {
+          "body": "Non",
+          "pourcentage": "-10",
+          "questionIsCountableIfchecked": "true"
+        },
+        {
+          "body": "Non concerné",
+          "pourcentage": "NA",
+          "questionIsCountableIfchecked": "false"
+        }
+      ],
+      "subQuestions": []
+    }
+  ];

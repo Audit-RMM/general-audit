@@ -519,6 +519,7 @@ export class AppComponent {
     console.log(event.target.value)
 
   }
+  // sub question
   selectSubResponse(event:any){
     console.log(event.target.value)
   }

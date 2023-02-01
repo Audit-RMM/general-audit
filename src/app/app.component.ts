@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Question} from './question.model';
+import {Question, Quiz} from './question.model';
 import {groupBy} from "rxjs";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -19,27 +18,14 @@ export class AppComponent {
   public questionsTest2: any = [];
   public test: any;
 
-  question = new Question();
-  form!: FormGroup;
+  quiz = new Quiz();
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
 
-    this.form = new FormGroup({
-      entreprise: new FormControl(),
-      realisateur: new FormControl(),
-      email: new FormControl(),
-      questions: new FormArray([
-        new FormGroup({
-          idQuestion: new FormControl(),
-          coef: new FormControl(),
-          score: new FormControl(),
-          isCountable: new FormControl()
-        })
-      ])
-    });
+
     this.questionsTest2 = [
       {
         "idQuestion": "0",
@@ -194,12 +180,19 @@ export class AppComponent {
         "subQuestions": []
       }
     ];
+    let questions : Question[] = [];
     this.questions$ = this.questionsTest2
     this.questions$.forEach((q: any) => {
+    let question = new Question()
+      question.id=q.idQuestion
+      question.body=q.body
+      question.coef=q.coef
+      questions.push(question)
       q.subQuestions.forEach((subQ: any) => {
         subQ.display = false;
       });
     });
+    this.quiz.questions = questions
     /*.reduce((group:any, elt:any) => {
     const { category } = elt;
     console.log(elt)
@@ -212,7 +205,7 @@ export class AppComponent {
   }
 
   calcul() {
-    console.log(this.form)
+    console.log(this.quiz)
   }
 
   selectResponse(event: any) {

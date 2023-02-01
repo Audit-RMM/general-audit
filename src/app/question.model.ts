@@ -1,11 +1,16 @@
-export class Question {
+export class Quiz {
     public entreprise!:string;
     public realisateur!:string;
     public email!:string;
+    public questions!:Question[]
+
+  }
+  export class Question{
     public id!: string;
-    public title!: string;
-    public level!: string;
+    public body!: string;
+    public coef!: string;
     public score!: number;
+    public response!: any;
     public responses!: [];
-    public isSubQuestion!: boolean;
+    public isCountable!: boolean;
   }

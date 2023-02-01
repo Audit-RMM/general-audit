@@ -52,12 +52,12 @@
                   <option *ngFor="let response of question.responses;let j=index"
                           [ngValue]="response">{{response.body}}</option>
                 </select>
-                <input type="text" class="form-control col-8" name="id"
+               <!-- <input type="text" class="form-control col-8" name="id"
                        [(ngModel)]="quiz.questions[i].id" #name="ngModel" >
                 <input type="text" class="form-control col-8" name="body"
                        [(ngModel)]="quiz.questions[i].body" #name="ngModel" >
                 <input type="text" class="form-control col-8" p name="coef"
-                       [(ngModel)]="quiz.questions[i].coef" #name="ngModel" >
+                       [(ngModel)]="quiz.questions[i].coef" #name="ngModel" >-->
 
                 <div *ngIf="question.subQuestions">
                   <div *ngFor="let subQuestion of question.subQuestions" class="m-4">

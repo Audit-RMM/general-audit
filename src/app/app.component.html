@@ -46,7 +46,7 @@
                 <i><h6><em>Question {{i + 1}}: </em> {{question.body}} <i data-toggle="popover"
                                                                           title="{{question.description}}"
                                                                           class="text-info">i</i></h6></i>
-                <select class="form-select form-control col-4" (change)="selectResponse($event)" name="response"
+                <select class="form-select form-control col-4" (change)="selectResponse(quiz.questions[i].response)" name="response"
                         [(ngModel)]="quiz.questions[i].response" #name="ngModel">
                   <option value=""></option>
                   <option *ngFor="let response of question.responses;let j=index"

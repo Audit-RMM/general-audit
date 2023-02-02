@@ -208,11 +208,11 @@ export class AppComponent {
     console.log(this.quiz)
   }
 
-  selectResponse(event: any) {
-    let idResponse = event.target.value
+  selectResponse(response: any) {
+    console.log(response)
     this.questions$.forEach((q: any) => {
       q.subQuestions.forEach((subQ: any) => {
-        if (subQ.responseIndex == idResponse) {
+        if (subQ.responseIndex == response.idResponse) {
           subQ.display = true;
         }else{
           subQ.display = false;

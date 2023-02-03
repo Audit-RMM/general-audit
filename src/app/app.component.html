@@ -60,13 +60,15 @@
                        [(ngModel)]="quiz.questions[i].coef" #name="ngModel" >-->
 
                 <div *ngIf="question.subQuestions">
-                  <div *ngFor="let subQuestion of question.subQuestions" class="m-4">
+                  <div *ngFor="let subQuestion of question.subQuestions;let k=index" class="m-4">
                     <div *ngIf="subQuestion.display">
                       <label><h6>{{subQuestion.body}}</h6></label> <span class="d-inline-block" tabindex="0"
                                                                          data-bs-toggle="popover"
                                                                          data-bs-trigger="hover focus"
                                                                          title="{{question.description}}">i</span>
-                      <select class="form-select form-control col-4" (change)="selectSubResponse($event)">
+                      <select class="form-select form-control col-4" (change)="selectSubResponse($event)"
+                              (change)="selectResponse(quiz.questions[i].subQuestion[k].response)" name="response"
+                              [(ngModel)]="quiz.questions[i].subQuestion[k]" #name="ngModel">
                         <option *ngFor="let response of subQuestion.responses"
                                 [value]="response.pourcentage">{{response.body}}</option>
                       </select>

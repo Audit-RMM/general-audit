@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Question, Quiz} from './question.model';
-import {groupBy} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +12,6 @@ export class AppComponent {
   public level!: string;
   public score!: number;
   public responses!: [];
-  public isSubQuestion!: boolean;
   public questions$: any = [];
   public questionsTest2: any = [];
   public test: any;
@@ -180,27 +178,25 @@ export class AppComponent {
         "subQuestions": []
       }
     ];
-    let questions : Question[] = [];
+    let questions: Question[] = [];
     this.questions$ = this.questionsTest2
     this.questions$.forEach((q: any) => {
-    let question = new Question()
-      question.id=q.idQuestion
-      question.body=q.body
-      question.coef=q.coef
-      questions.push(question)
+      let question = new Question()
+      question.id = q.idQuestion
+      question.body = q.body
+      question.coef = q.coef
+      let subQuestions: Question[] = [];
       q.subQuestions.forEach((subQ: any) => {
         subQ.display = false;
+        let subQuestion = new Question();
+        subQuestion.id = subQ.idQuestion
+        subQuestion.body = subQ.body
+        subQuestions.push(subQ);
       });
+      question.subQuestion = subQuestions;
+      questions.push(question)
     });
     this.quiz.questions = questions
-    /*.reduce((group:any, elt:any) => {
-    const { category } = elt;
-    console.log(elt)
-    group[category] = group[category] ?? [];
-    console.log(elt)
-    group[category].push(elt);
-    return group;
-  }, {})*/
     console.log(this.questions$)
   }
 
@@ -214,7 +210,7 @@ export class AppComponent {
       q.subQuestions.forEach((subQ: any) => {
         if (subQ.responseIndex == response.idResponse) {
           subQ.display = true;
-        }else{
+        } else {
           subQ.display = false;
         }
 

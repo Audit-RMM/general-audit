@@ -13,4 +13,5 @@ export class Quiz {
     public response!: any;
     public responses!: [];
     public isCountable!: boolean;
+    public subQuestion!:Question[]
   }

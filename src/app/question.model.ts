@@ -2,6 +2,7 @@ export class Quiz {
     public entreprise!:string;
     public realisateur!:string;
     public email!:string;
+    public category!:string;
     public questions!:Question[]
 
   }

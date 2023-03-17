@@ -9,10 +9,12 @@ export class Quiz {
   export class Question{
     public id!: string;
     public body!: string;
-    public coef!: string;
+    public coef!: number;
+    public pourcentage!: number;
+    public recomandation!: string;
     public score!: number;
     public response!: any;
     public responses!: [];
     public isCountable!: boolean;
-    public subQuestion!:Question[]
+    public subQuestions!:Question[]
   }

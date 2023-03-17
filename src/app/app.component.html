@@ -28,9 +28,9 @@
         </div>
         <div>
           <h4 class="text-info mb-3"> Merci de répondre aux questions</h4>
-          <div class="card border-secondary mb-4 " *ngFor="let list of questionsTest2;let i=index">
+          <div class="card border-secondary mb-4 ">
             <div class="d-flex justify-content-between align-items-center card-header bg-gradient" id="h1">
-              <span><h3>{{list.category}}</h3></span>
+              <!--              <span><h3>{{list.category}}</h3></span>-->
               <button type="button" data-toggle="collapse" data-target="#q1" aria-expanded="false" aria-controls="q1"
                       class="btn btn-outline-light">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor"
@@ -41,14 +41,14 @@
               </button>
             </div>
             <div id="q1" class="collapse show" aria-labelledby="h1"
-                 *ngFor="let question of list.questions; let j=index">
+                 *ngFor="let question of questionsTest2; let i=index">
               <div class="card-body">
-                <i><h6><em>Question {{j + 1}}: </em> {{question.body}}
+                <i><h6><em>Question {{i + 1}}: </em> {{question.body}}
                   <i *ngIf="question.description" class=" fa fa-question-circle text-info" aria-hidden="true"
                      title="{{question.description}}"></i></h6></i>
                 <select class="form-select form-control col-4"
-                        (change)="selectResponse(quizs[i].questions[j].response,list.category)" name="response"
-                        [(ngModel)]="quizs[i].questions[j].response" #response="ngModel" required>
+                        (change)="selectResponse(quiz.questions[i].response,i,'cat')" name="response"
+                        [(ngModel)]="quiz.questions[i].response" #response="ngModel" required>
                   <option [value]=""></option>
                   <option *ngFor="let response of question.responses;"
                           [ngValue]="response">{{response.body}}</option>
@@ -56,15 +56,14 @@
 
 
                 <div *ngIf="question.subQuestions">
-                  <div *ngFor="let subQuestion of question.subQuestions;let k=index" class="m-4">
+                  <div *ngFor="let subQuestion of question.subQuestions;let j=index" class="m-4">
                     <div *ngIf="subQuestion.display">
                       <label><h6>{{subQuestion.body}}</h6></label>
                       <i *ngIf="subQuestion.description" class=" fa fa-question-circle text-info"
                          title="{{subQuestion.description}}"></i>
                       <select class="form-select form-control col-4"
-                              (change)="selectSubResponse(quizs[i].questions[j].subQuestion[k].response)"
                               name="subResponse"
-                              [(ngModel)]="quizs[i].questions[j].subQuestion[k]" #subResponse="ngModel" required>
+                              [(ngModel)]="quiz.questions[i].subQuestions[j]" #subResponse="ngModel" required>
                         <option *ngFor="let response of subQuestion.responses"
                                 [ngValue]="response">{{response.body}}</option>
                       </select>
@@ -76,9 +75,16 @@
             </div>
           </div>
           <input type="submit" name="submit" class="btn btn-success m-2 float-end" value="Valider"
-                 [disabled]="questionForm.invalid"/>
+          />
+          <!--          [disabled]="questionForm.invalid"-->
         </div>
       </form>
+      <div *ngIf="recomandations">
+        <ul *ngFor="let recomandation of recomandations">
+          <li *ngIf="recomandation">{{recomandation}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
+<!--<pre>{{recomandations}}</pre>-->

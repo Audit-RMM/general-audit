@@ -1,0 +1,40 @@
+[
+  '{{repeat(5)}}',
+  {
+    "category": '{{lorem(1, "words")}}',
+    "questions": [
+      '{{repeat(2,4)}}',
+      {
+        "idQuestion": '{{index()}}',
+        "body":  '{{lorem(9, "words")}}',
+        "coef": '{{integer(1, 5)}}',
+        "description":'{{lorem(10, "words")}}',
+        "responses":[
+          '{{repeat(2,4)}}',
+          {
+            "idResponse": '{{index()}}',
+            "body":  '{{lorem(9, "words")}}',
+            "pourcentage": '{{integer(0, 100)}}',
+            "recomandation": '{{lorem(15, "words")}}',
+            "isCountable": '{{bool()}}'
+          }],
+        "subQuestions": [
+          '{{repeat(1,3)}}',
+          {
+            "idQuestion":'{{index()}}',
+            "body":  '{{lorem(5, "words")}}',
+            "responses":[
+              '{{repeat(2,3)}}',
+              {
+
+                "idResponse": '{{index()}}',
+                "body":  '{{lorem(3, "words")}}',
+                "pourcentage": '{{integer(0, 100)}}',
+                "recomandation": '{{lorem(15, "words")}}',
+                "isCountable": '{{bool()}}'
+              }]
+          }
+        ]
+      }
+    ]
+  }];

@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Question} from './question.model';
-import {groupBy} from "rxjs";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {Question, Quiz} from './question.model';
 
 @Component({
   selector: 'app-root',
@@ -14,225 +12,313 @@ export class AppComponent {
   public level!: string;
   public score!: number;
   public responses!: [];
-  public isSubQuestion!: boolean;
   public questions$: any = [];
   public questionsTest2: any = [];
-  public test: any;
-
-  question = new Question();
-  form!: FormGroup;
+  public quizs: any = [];
+  public quiz: Quiz;
+  public recomandations: string[] = [];
+  public finalScore : number = 0;
+  public totalPercent : number[] = [];
 
   constructor(private http: HttpClient) {
+    this.quiz = new Quiz();
   }
 
   ngOnInit(): void {
 
-    this.form = new FormGroup({
-      entreprise: new FormControl(),
-      realisateur: new FormControl(),
-      email: new FormControl(),
-      questions: new FormArray([
-        new FormGroup({
-          idQuestion: new FormControl(),
-          coef: new FormControl(),
-          score: new FormControl(),
-          isCountable: new FormControl()
-        })
-      ])
-    });
+
     this.questionsTest2 = [
       {
-        "idQuestion": "0",
-        "body": "Votre application utilise-t-elle un système de versionning [ exp : Git, SVN ect… ]",
-        "description": "test description",
-        "category": "Méthodologie & process",
-        "coef": "4",
+        "idQuestion": "01",
+        "body": "Votre application utilise-t-elle un système de versionning [ exp : Git, SVN ect… ] ?",
+        "coef": 2,
+        "description": "et exercitation do sint laborum tempor deserunt amet pariatur labore",
         "responses": [
           {
             "idResponse": "01",
-            "body": "Oui",
-            "pourcentage": "50",
-            "recomandation": "",
-            "questionIsCountableIfchecked": "true"
+            "body": "OUI",
+            "pourcentage": 51,
+            "recomandation": "Bravo",
+            "isCountable": true
           },
           {
             "idResponse": "02",
-            "body": "Non",
-            "pourcentage": "-30",
-            "questionIsCountableIfchecked": "true"
+            "body": "NON",
+            "pourcentage": 3,
+            "recomandation": "Un systhème de versionning est obligatoire",
+            "isCountable": true
           }
         ],
         "subQuestions": [
           {
-            "responseIndex": "01",
-            "body": "Quel système utilise-t-elle ?",
+            "idQuestion": "01",
+            "body": "Quel système utilise-t-elle ? ",
             "responses": [
               {
-                "idResponse": "011",
-                "body": "GIT",
-                "pourcentage": "50",
-                "recomandation": ""
-              },
-              {
-                "idResponse": "012",
+                "idResponse": 0,
                 "body": "SVN",
-                "pourcentage": "20",
-                "recomandation": ""
+                "pourcentage": 15,
+                "recomandation": "Tu dois migrer vers Git ou autre système ",
+                "isCountable": true
               },
               {
-                "idResponse": "013",
+                "idResponse": 1,
+                "body": "GIT",
+                "pourcentage": 21,
+                "recomandation": "occaecat ad quis exercitation non laborum consectetur cupidatat laborum quis labore esse Lorem irure mollit",
+                "isCountable": true
+              },
+              {
+                "idResponse": 2,
+                "body": "Mercurial",
+                "pourcentage": 97,
+                "recomandation": "",
+                "isCountable": true
+              },
+              {
+                "idResponse": 2,
                 "body": "Autre",
-                "pourcentage": "10",
-                "recomandation": ""
+                "pourcentage": 97,
+                "recomandation": "",
+                "isCountable": true
               }
-            ],
-            "subQuestions": []
+            ]
           }
         ]
       },
       {
-        "idQuestion": "1",
+        "idQuestion": "10",
         "body": "La partie technique de votre application est-elle documentée ?",
-        "description": " documenattaion",
-        "category": "Documentation",
-        "coef": "2",
+        "coef": 1,
+        "description": "",
         "responses": [
           {
             "idResponse": "11",
-            "body": "Oui",
-            "pourcentage": "40",
+            "body": "OUI",
+            "pourcentage": 51,
             "recomandation": "",
-            "questionIsCountableIfchecked": "true"
+            "isCountable": true
           },
           {
             "idResponse": "12",
-            "body": "Non",
-            "pourcentage": "-10",
-            "questionIsCountableIfchecked": "true"
+            "body": "NON",
+            "pourcentage": 59,
+            "recomandation": "La documentation est utile pour faciliter la continuté de travail ",
+            "isCountable": true
           }
         ],
         "subQuestions": [
           {
-            "responseIndex": "11",
-            "body": "Les prérequis de mise en place de l'application sont-ils mentionnés ?",
+            "idQuestion": "11",
+            "body": " Les prérequis de mise en place de l'application sont-ils mentionnés ?",
             "responses": [
               {
-                "idResponse": "111",
+                "idResponse": 0,
                 "body": "OUI",
-                "pourcentage": "20",
-                "recomandation": ""
+                "pourcentage": 45,
+                "recomandation": "",
+                "isCountable": true
               },
               {
+                "idResponse": 1,
                 "body": "NON",
-                "pourcentage": "0",
-                "recomandation": ""
+                "pourcentage": 81,
+                "recomandation": "Il est préférable de mentionner les prérequis",
+                "isCountable": true
               }
-            ],
-            "subQuestions": []
-
+            ]
           },
           {
-            "responseIndex": "11",
-            "body": "Les étapes de mise en place de l'application (installation & configuration .. )  sont-ils mentionnés ?",
+            "idQuestion": "11",
+            "body": "La partie fonctionnelle de votre application est-elle documentée (son contexte, son fonctionnement..) ?",
             "responses": [
               {
+                "idResponse": 0,
                 "body": "OUI",
-                "pourcentage": "20",
-                "recomandation": ""
+                "pourcentage": 20,
+                "recomandation": "",
+                "isCountable": true
               },
               {
+                "idResponse": 1,
                 "body": "NON",
-                "pourcentage": "0",
-                "recomandation": ""
+                "pourcentage": 49,
+                "recomandation": "",
+                "isCountable": true
               }
-            ],
-            "subQuestions": []
+            ]
           },
           {
-            "responseIndex": "0",
-            "body": "Un guide d'utilisation de l'application est-il présent ?",
+            "idQuestion": "11",
+            "body": "Si votre application s'interface-t-elle avec d'autres services Les flux sont-ils documentés?",
             "responses": [
               {
+                "idResponse": 0,
                 "body": "OUI",
-                "pourcentage": "20",
-                "recomandation": ""
+                "pourcentage": 20,
+                "recomandation": "",
+                "isCountable": true
               },
               {
+                "idResponse": 1,
                 "body": "NON",
-                "pourcentage": "0",
-                "recomandation": ""
+                "pourcentage": 49,
+                "recomandation": "",
+                "isCountable": true
+              },
+              {
+                "idResponse": 2,
+                "body": "Non concerné",
+                "pourcentage": 49,
+                "recomandation": "",
+                "isCountable": false
               }
-            ],
-            "subQuestions": []
+            ]
           }
         ]
       },
       {
-        "idQuestion": "2",
-        "body": "Si votre application s'interface-t-elle avec d'autres services Les flux sont-ils documentés?  ",
-        "description": " communication avec d'autres application/api ..",
-        "category": "Documentation",
-        "coef": "2",
+        "idQuestion": "11",
+        "body": "Toutes les références / documents  de la StartUp sont-elles centralisées et bien accessibles aux personnes concernées ?",
+        "coef": 1,
+        "description": "Lorem ex velit eiusmod et esse mollit do sint sit",
         "responses": [
           {
-            "body": "Oui",
-            "pourcentage": "100",
+            "idResponse": "11",
+            "body": "OUI",
+            "pourcentage": 51,
             "recomandation": "",
-            "questionIsCountableIfchecked": "true"
+            "isCountable": true
           },
           {
-            "body": "Non",
-            "pourcentage": "-10",
-            "questionIsCountableIfchecked": "true"
-          },
-          {
-            "body": "Non concerné",
-            "pourcentage": "NA",
-            "questionIsCountableIfchecked": "false"
+            "idResponse": "12",
+            "body": "NON",
+            "pourcentage": 59,
+            "recomandation": "La documentation est utile pour faciliter la continuté de travail ",
+            "isCountable": true
           }
         ],
         "subQuestions": []
-      }
+      },
+      {
+        "idQuestion": "20",
+        "body": "Votre application est-elle compatible sur différentes plateformes ( navigateurs web / terminaux mobiles)  ?",
+        "coef": 1,
+        "description": "et exercitation do sint laborum tempor deserunt amet pariatur labore",
+        "responses": [
+          {
+            "idResponse": "20",
+            "body": "OUI",
+            "pourcentage": 51,
+            "recomandation": "Bravo",
+            "isCountable": true
+          },
+          {
+            "idResponse": "21",
+            "body": "NON",
+            "pourcentage": 3,
+            "recomandation": "",
+            "isCountable": true
+          }
+        ],
+        "subQuestions": []
+      },
+      {
+        "idQuestion": "21",
+        "body": "Votre application respecte-t-elle le responsive design ?",
+        "coef": 1,
+        "description": "et exercitation do sint laborum tempor deserunt amet pariatur labore",
+        "responses": [
+          {
+            "idResponse": "01",
+            "body": "OUI",
+            "pourcentage": 51,
+            "recomandation": "Bravo",
+            "isCountable": true
+          },
+          {
+            "idResponse": "02",
+            "body": "NON",
+            "pourcentage": 3,
+            "recomandation": "Le responsive design est l'un des facteurs le plus important pour les utilisateurs",
+            "isCountable": true
+          }
+        ],
+        "subQuestions": []
+      },
     ];
-    this.questions$ = this.questionsTest2
-    this.questions$.forEach((q: any) => {
+    let questions: Question[] = [];
+    this.questionsTest2.forEach((q: any) => {
+      let question = new Question()
+      question.id = q.idQuestion
+      question.body = q.body
+      question.coef = q.coef
+      let subQuestions: Question[] = [];
       q.subQuestions.forEach((subQ: any) => {
         subQ.display = false;
+        let subQuestion = new Question();
+        subQuestion.body = subQ.body
+        subQuestions.push(subQuestion);
       });
+      question.subQuestions = subQuestions;
+      questions.push(question)
     });
-    /*.reduce((group:any, elt:any) => {
-    const { category } = elt;
-    console.log(elt)
-    group[category] = group[category] ?? [];
-    console.log(elt)
-    group[category].push(elt);
-    return group;
-  }, {})*/
-    console.log(this.questions$)
+    this.quiz.questions = questions
+    console.log(questions)
+  }
+
+
+  selectResponse(response: any, i: number, category: any) {
+    this.questionsTest2[i].subQuestions.forEach((subQ: any) => {
+      if (subQ.idQuestion == response.idResponse) {
+        subQ.display = true;
+      } else {
+        subQ.display = false;
+      }
+    });
+
+
   }
 
   calcul() {
-    console.log(this.form)
-  }
+    console.log(this.quiz);
+    console.log(this.recomandations);
+    // pourcentage
+    let pourcentage = [];
+    // purge
+    this.recomandations = [];
+    // nb question
+    let nbQuestion = this.quiz.questions.length;
+    this.quiz.questions.forEach((question: Question) => {
 
-  selectResponse(event: any) {
-    let idResponse = event.target.value
-    this.questions$.forEach((q: any) => {
-      q.subQuestions.forEach((subQ: any) => {
-        if (subQ.responseIndex == idResponse) {
-          subQ.display = true;
+      let questionFinalPercent = 0;
+      questionFinalPercent += question.response.pourcentage
+      let subRec: string[] = [];
+      if (!this.isEmpty(question.response?.recomandation)) {
+
+        this.recomandations.push(question.response?.recomandation)
+      }
+      question.subQuestions.forEach((subQuestion: Question) => {
+        if(subQuestion.isCountable){
+          questionFinalPercent += subQuestion.pourcentage
         }else{
-          subQ.display = false;
+          nbQuestion--;
         }
-
-      });
-    });
+        if (!this.isEmpty(subQuestion?.recomandation)) {
+          subRec.push(subQuestion?.recomandation)
+        }
+      })
+      let totalPerQuest = questionFinalPercent * question.coef;
+      this.totalPercent.push(totalPerQuest)
+      this.recomandations.push(subRec.toString());
+    })
+    console.log(this.totalPercent);
+    let tot = this.totalPercent.reduce((a, b) => a + b, 0)
+    console.log(tot / nbQuestion);
 
   }
 
-  // sub question
-  selectSubResponse(event: any) {
-    console.log(event.target.value)
+  isEmpty(str: string) {
+    return (!str || str.length === 0 || str === "" || !/[^\s]/.test(str) || /^\s*$/.test(str) || str.replace(/\s/g, "") === "");
   }
-
 }

@@ -1,28 +1,23 @@
 <div class="mt-2">
   <div class="container-fluid">
-    <!--<pre>{{questions|json}}</pre>-->
-    <div class="jumbotron">
-      <h3>Diagnostique</h3>
-      <p>évaluation & recomandation </p>
-    </div>
 
     <div class="tab-content">
-      <form (ngSubmit)="calcul()" #questionForm="ngForm">
+      <form (ngSubmit)="calcul()" #questionForm="ngForm" *ngIf="!displayRapport">
         <h2 class="text-info mb-3">Informations</h2>
         <div class="mb-2 mt-1 col-8 border-secondary">
           <div class="m-1 mt-3 row ">
             <label class="col-3"><h6>Audit fait pour <i class="text-danger">*</i></h6></label>
             <input type="text" class="form-control col-8" placeholder="Entreprise" name="entreprise"
-                   [(ngModel)]="quizs.entreprise" #entreprise="ngModel" required>
+                   [(ngModel)]="quiz.entreprise" #entreprise="ngModel" required>
           </div>
           <div class="m-1 row">
             <label class="col-3"><h6>Réalisé par <i class="text-danger">*</i></h6></label>
             <input type="text" class="form-control col-8" placeholder="Nom & Prénom" name="realisateur"
-                   [(ngModel)]="quizs.realisateur" #realisateur="ngModel" required>
+                   [(ngModel)]="quiz.realisateur" #realisateur="ngModel" required>
           </div>
           <div class="m-1 row">
             <label class="col-3"><h6>Email <i class="text-danger">*</i></h6></label>
-            <input type="text" class="form-control col-8" placeholder="email" name="email" [(ngModel)]="quizs.email"
+            <input type="text" class="form-control col-8" placeholder="email" name="email" [(ngModel)]="quiz.email"
                    #email="ngModel" required>
           </div>
         </div>
@@ -41,7 +36,7 @@
               </button>
             </div>
             <div id="q1" class="collapse show" aria-labelledby="h1"
-                 *ngFor="let question of questionsTest2; let i=index">
+                 *ngFor="let question of questions; let i=index">
               <div class="card-body">
                 <i><h6><em>Question {{i + 1}}: </em> {{question.body}}
                   <i *ngIf="question.description" class=" fa fa-question-circle text-info" aria-hidden="true"
@@ -79,12 +74,9 @@
           <!--          [disabled]="questionForm.invalid"-->
         </div>
       </form>
-      <div *ngIf="recomandations">
-        <ul *ngFor="let recomandation of recomandations">
-          <li *ngIf="recomandation">{{recomandation}}</li>
-        </ul>
+      <div *ngIf="displayRapport">
+        <app-rapport [recomandations]='recomandations' [infos]='infos' [score]="finalScore"></app-rapport>
       </div>
     </div>
   </div>
 </div>
-<!--<pre>{{recomandations}}</pre>-->

@@ -5,6 +5,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionBodyPipe } from './question-body.pipe';
+import { RapportComponent } from './rapport/rapport.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionBodyPipe
+    QuestionBodyPipe,
+    RapportComponent
   ],
   imports: [
     BrowserModule,

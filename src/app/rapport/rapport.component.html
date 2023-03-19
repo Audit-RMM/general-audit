@@ -1,0 +1,17 @@
+<div class="mt-2">
+  <div class="container-fluid">
+<main class="container">
+  <strong class="d-block text-gray-dark">Rapport réalisé par : {{infos.realisateur}}</strong>
+  <strong class="d-block text-gray-dark"> pour {{ infos.entreprise}} </strong>
+
+  Votre score final est : {{score | number:'1.0-2'}} %
+    <strong class="d-block text-gray-dark">Nos recommandations : </strong>
+
+    <div *ngIf="recomandations">
+      <ul *ngFor="let recomandation of recomandations">
+        <li *ngIf="recomandation">{{recomandation}}</li>
+      </ul>
+    </div>
+</main>
+  </div>
+</div>

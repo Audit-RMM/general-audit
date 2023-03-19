@@ -18,3 +18,8 @@ export class Quiz {
     public isCountable!: boolean;
     public subQuestions!:Question[]
   }
+  export class Infos{
+    public entreprise!:string;
+    public realisateur!:string;
+    public email!:string;
+  }

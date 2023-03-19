@@ -215,7 +215,7 @@ export class AppComponent {
         "idResponse": "41",
         "body": "NON",
         "pourcentage": 0,
-        "recomandation": "Il est préférable d'assurer que votre application sur différentes plateformes( chrome, firefox .., android,ios pour les applications mobiles)  ",
+        "recomandation": "Il est préférable d'assurer que votre application compatible sur différentes plateformes( chrome, firefox .., android,ios pour les applications mobiles)  ",
         "isCountable": true
       }
     ],
@@ -773,7 +773,7 @@ export class AppComponent {
                 "idResponse": 3,
                 "body": "Supérieur à 60%",
                 "pourcentage": 40,
-                "recomandation": " Bravo, la couverture de vos tests est élevée , c'est une bonne signe",
+                "recomandation": " Bravo, la couverture de vos tests est élevée",
                 "isCountable": true
               }
             ]
